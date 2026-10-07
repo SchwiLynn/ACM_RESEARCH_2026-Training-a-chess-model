@@ -1,0 +1,7 @@
+python-chess
+numpy
+torch
+requests
+zstandard
+matplotlib
+maia2
