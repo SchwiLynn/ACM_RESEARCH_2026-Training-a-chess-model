@@ -1,4 +1,5 @@
 import io
+from pathlib import Path
 
 import chess.pgn
 import requests
@@ -7,6 +8,8 @@ import zstandard as zstd
 URL = (
     "https://database.lichess.org/standard/lichess_db_standard_rated_2026-08.pgn.zst"
 )
+
+OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "sample.pgn"
 
 MAX_GAMES = 1000
 games_saved = 0
@@ -18,7 +21,7 @@ with requests.get(URL, stream=True, timeout=60) as response:
 
     with decompressor.stream_reader(response.raw) as reader:
         with io.TextIOWrapper(reader, encoding="utf-8") as pgn:
-            with open("sample.pgn", "w+", encoding="utf-8") as output:
+            with open(OUTPUT_PATH, "w+", encoding="utf-8") as output:
                 while games_saved < MAX_GAMES:
                     game = chess.pgn.read_game(pgn)
 
@@ -56,5 +59,5 @@ with requests.get(URL, stream=True, timeout=60) as response:
 
 print(f"Games saved: {games_saved}")
 print(f"Positions saved: {positions_saved}")
-print("Output: sample.pgn")
+print(f"Output: {OUTPUT_PATH}")
 

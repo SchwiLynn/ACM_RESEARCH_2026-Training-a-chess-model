@@ -1,5 +1,9 @@
+from pathlib import Path
+
 import numpy as np
 import chess.pgn
+
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 def make_tensor(board):
     tensor = np.zeros((12,8, 8,), dtype=np.int32)
@@ -15,7 +19,7 @@ def make_tensor(board):
         tensor[channel, row, col] = 1
 
     return tensor
-with open("Chessgame.pgn", encoding="utf-8-sig") as file:
+with open(DATA_DIR / "Chessgame.pgn", encoding="utf-8-sig") as file:
     game = chess.pgn.read_game(file) 
     board = game.board()
     tensor = make_tensor(board)

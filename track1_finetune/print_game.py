@@ -1,6 +1,10 @@
+from pathlib import Path
+
 import chess.pgn
-import pandas as pd
-with open("Chessgame.pgn", encoding="utf-8-sig") as file:
+
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+
+with open(DATA_DIR / "Chessgame.pgn", encoding="utf-8-sig") as file:
     game = chess.pgn.read_game(file)        
 board = game.board()
 
