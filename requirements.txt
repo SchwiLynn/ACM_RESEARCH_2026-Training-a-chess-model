@@ -1,1 +1,8 @@
 numpy==2.5.3
+python-chess
+numpy
+torch
+requests
+zstandard
+matplotlib
+maia2

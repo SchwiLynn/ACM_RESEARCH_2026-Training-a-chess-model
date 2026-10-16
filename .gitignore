@@ -1,0 +1,25 @@
+# Data and model files (too big for GitHub, use the shared Google Drive)
+data/*
+!data/.gitkeep
+*.pgn
+*.zst
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
