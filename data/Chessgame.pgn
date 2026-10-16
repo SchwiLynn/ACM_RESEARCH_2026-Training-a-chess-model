@@ -1,0 +1,23 @@
+[Event "rated rapid game"]
+[Site "https://lichess.org/Mdm0oojI"]
+[Date "2026.10.09"]
+[Round "-"]
+[White "erenGLNR1234"]
+[Black "Rook_w_Hiccups"]
+[Result "0-1"]
+[GameId "Mdm0oojI"]
+[UTCDate "2026.10.09"]
+[UTCTime "16:50:08"]
+[WhiteElo "1437"]
+[BlackElo "1433"]
+[WhiteRatingDiff "-6"]
+[BlackRatingDiff "+6"]
+[Variant "Standard"]
+[TimeControl "600+0"]
+[ECO "B22"]
+[Opening "Sicilian Defense: Alapin Variation"]
+[Termination "Normal"]
+
+1. e4 c5 2. c3 d5 3. Nf3 dxe4 4. Qa4+ Bd7 5. Qxe4 Nc6 6. Na3 Nf6 7. Qc4 e6 8. Nb5 a6 9. Na3 Be7 10. d4 b5 11. Qd3 c4 12. Nxc4 bxc4 13. Qxc4 O-O 14. Bd3 Qb6 15. O-O Rac8 16. Qa4 Ne5 17. Qd1 Nxf3+ 18. Qxf3 Bc6 19. Qg3 Rfd8 20. Bh6 Nh5 21. Qg4 g6 22. Bg5 Bxg5 23. Qxg5 Qxb2 24. Rae1 Qxc3 25. Be2 Ng7 26. Rc1 Qb2 27. Rxc6 Qxe2 28. Rxc8 Rxc8 29. Rc1 Rxc1+ 30. Qxc1 Nf5 31. h3 Nxd4 32. Qc8+ Kg7 33. Qc3 e5 34. Qg3 f6 35. Qa3 Qe1+ 36. Kh2 a5 37. Qe7+ Kh6 38. Qxf6 a4 39. Qf8+ Kh5 40. g4+ Kg5 41. Qe7+ Kf4 42. Qf6+ Ke4 43. Kg3 Qg1+ 44. Kh4 Nf3+ 45. Qxf3+ Kxf3 46. Kg5 Qxf2 47. Kh6 Qh4+ 48. Kg7 e4 49. Kf7 e3 50. Ke6 e2 51. Kd5 e1=Q 52. Kc4 Qd8 53. Kb5 Qc3 54. Kxa4 Qdd4+ 55. Kb5 Qcc5+ 56. Ka6 Qdd6+ 57. Kb7 Qcc7+ 58. Ka8 Qdd8# 0-1
+
+
