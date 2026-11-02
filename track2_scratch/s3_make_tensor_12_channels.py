@@ -5,8 +5,10 @@ import chess.pgn
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
-def make_tensor(board):
-    tensor = np.zeros((12,8, 8,), dtype=np.int32)
+def make_tensor_12(board):
+    if board.turn == chess.BLACK:
+        board = board.mirror()
+    tensor = np.zeros((12,8, 8), dtype=np.int32)
     for square, piece in board.piece_map().items():
         channel = piece.piece_type - 1
 
@@ -22,5 +24,5 @@ def make_tensor(board):
 with open(DATA_DIR / "Chessgame.pgn", encoding="utf-8-sig") as file:
     game = chess.pgn.read_game(file) 
     board = game.board()
-    tensor = make_tensor(board)
+    tensor = make_tensor_12(board)
     print(tensor)
