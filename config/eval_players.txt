@@ -1,0 +1,11 @@
+# Our 10 evaluation players (P1). One Lichess username per line.
+thakt
+DanhLaThuaThuaThua
+Rook_w00_0Hiccups
+wfhenning
+srihari2016
+Three-Roads
+AlphGC
+bimba-ct
+Vati1313
+SopraLeCase

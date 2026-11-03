@@ -22,8 +22,11 @@ from pathlib import Path
 import chess
 import chess.pgn
 
+from maia2.utils import create_elo_dict, map_to_category, mirror_move
+
 # Result from White's point of view.
-WHITE_SCORE = {"1-0": 1.0, "0-1": 0.0, "1/2-1/2": 0.5}
+WHITE_SCORE = {"1-0": 1, "0-1": -1, "1/2-1/2": 0}
+ELO_DICT = create_elo_dict()
 
 FIELDS = [
     # --- required by maia2 inference---
@@ -31,8 +34,11 @@ FIELDS = [
     "move",           # the move actually played, UCI
     "active_elo",     # rating of the player making this move
     "opponent_elo",
+    "active_elo_bucket",    # Maia-2 rating group of the mover (0-10)
+    "opponent_elo_bucket",
     # --- needed for the fine-tuning loss (value head) ---
-    "active_win",     # game result from the mover's point of view: 1 / 0.5 / 0
+    "active_win",     # game result from the mover's point of view: 1 / -1 / 0
+    "mirrored",       # 1 if Black moved (board and move are flipped)
     # --- needed for filtering and splitting ---
     "game_id",
     "date",           # UTCDate, for the newest-20%-is-test split
@@ -83,11 +89,14 @@ def rows_from_game(game, target):
         clock = node.clock()  # seconds left after the move, or None
 
         yield {
-            "board": board.fen(),
-            "move": move.uci(),
+            "board": board.fen() if mover_is_white else board.mirror().fen(),            
+            "move": move.uci() if mover_is_white else mirror_move(move.uci()),
             "active_elo": white_elo if mover_is_white else black_elo,
             "opponent_elo": black_elo if mover_is_white else white_elo,
-            "active_win": white_score if mover_is_white else 1.0 - white_score,
+            "active_elo_bucket": map_to_category(white_elo if mover_is_white else black_elo, ELO_DICT),
+            "opponent_elo_bucket": map_to_category(black_elo if mover_is_white else white_elo, ELO_DICT),
+            "active_win": white_score if mover_is_white else - white_score,
+            "mirrored": 0 if mover_is_white else 1,
             "game_id": gid,
             "date": date,
             "time_control": tc,
