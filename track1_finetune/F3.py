@@ -37,6 +37,11 @@ def maia2_predict(data, device="cpu", results="results.csv"):
 
 if __name__=="__main__":
     import argparse
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "shared"))
+
+    from evaluation_metrics import evaluate_predictions, format_report
     parser=argparse.ArgumentParser(description="Evaluate base Maia-2 on a move table (board, move, active_elo, opponent_elo).")
     parser.add_argument("input", nargs="?", default="track1_finetune/exampleGame.csv",
                         help="CSV of positions to evaluate (default: Ronith's example game)")
@@ -48,4 +53,7 @@ if __name__=="__main__":
 
     print(f"Loading {args.input}")
     df_real_data=pd.read_csv(args.input)
-    maia2_predict(df_real_data, device=args.device, results=args.out)
+    # maia2_predict(df_real_data, device=args.device, results=args.out)
+    df_out=maia2_predict(df_real_data, device=args.device, results=args.out)
+    print()
+    print(format_report(evaluate_predictions(df_out)))
