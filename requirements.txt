@@ -1,8 +1,9 @@
-numpy==2.5.3
-python-chess
+# Python 3.10–3.12 (maia2 does not support 3.13 yet)
+# maia2 pins compatible versions of torch, numpy, pandas and chess,
+maia2
+chess
 numpy
-torch
+pandas
 requests
 zstandard
 matplotlib
-maia2
