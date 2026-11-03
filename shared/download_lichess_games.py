@@ -1,3 +1,4 @@
+# python3 /download_lichess_games.py thakt --max 300
 import argparse
 import requests
 import chess.pgn
@@ -8,7 +9,7 @@ HEADERS = {"User-Agent": "acm-research-p2 (student project)"}
 
 def download_games(username, max_games=None):
     url = f"https://lichess.org/api/games/user/{username}"
-    params = {"perfType": "rapid", "rated": "true"}
+    params = {"perfType": "rapid", "rated": "true", "clocks": "true"}
     if max_games is not None:
         params["max"] = max_games
 

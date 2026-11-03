@@ -36,6 +36,16 @@ def maia2_predict(data, device="cpu", results="results.csv"):
     return df_results
 
 if __name__=="__main__":
-    print("Loading exampleGame.csv")
-    df_real_data=pd.read_csv("track1_finetune/exampleGame.csv")
-    maia2_predict(df_real_data, device="cpu", results="results.csv")
+    import argparse
+    parser=argparse.ArgumentParser(description="Evaluate base Maia-2 on a move table (board, move, active_elo, opponent_elo).")
+    parser.add_argument("input", nargs="?", default="track1_finetune/exampleGame.csv",
+                        help="CSV of positions to evaluate (default: Ronith's example game)")
+    parser.add_argument("-o", "--out", default="results.csv",
+                        help="where to save per-position predictions (default: results.csv)")
+    parser.add_argument("--device", default="cpu", choices=["cpu", "gpu", "auto"],
+                        help="cpu (default), gpu, or auto (uses a GPU if one is available)")
+    args=parser.parse_args()
+
+    print(f"Loading {args.input}")
+    df_real_data=pd.read_csv(args.input)
+    maia2_predict(df_real_data, device=args.device, results=args.out)
