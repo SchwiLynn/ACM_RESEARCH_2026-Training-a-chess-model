@@ -1,0 +1,22 @@
+# Fine-Tuning Configuration for Track 1 (Maia-2 Fine-Tuning)
+model:
+  base_model: "maia2_rapid"       # Base Maia-2 Rapid model
+  architecture: "resnet_12block"   # 12 residual blocks, 256 channels
+  input_channels: 18              # 12 piece planes + side-to-move + 4 castling + en passant
+
+training:
+  optimizer: "adamw"               # AdamW optimizer
+  learning_rate: 0.0001           # 1e-4 starting LR (from Maia4All)
+  weight_decay: 0.00001           # 1e-5 weight decay (from Maia4All)
+  batch_size: 8192                # Positions per training batch
+  total_steps: 30000              # Total training steps
+  lr_schedule:
+    decay_steps:  # Drop LR by 10x at step intervals
+    decay_factor: 0.1
+
+data_filters:
+  min_ply: 10                     # Skip first 10 plies (opening theory)
+  min_clock_seconds: 30           # Skip moves with under 30 seconds left (time scrambles)
+  train_split: 0.80               # 80% training set
+  val_split: 0.10                 # 10% validation set
+  test_split: 0.10                # 10% test set
