@@ -3,8 +3,11 @@ import time
 from maia2 import model, inference
 
 def maia2_predict(data, device="cpu", results="results.csv"):
+    # print(f"Starting Baseline Evaluation on {device.upper()}")
+    # maia2_model=model.from_pretrained(type="rapid", device=device)
     print(f"Starting Baseline Evaluation on {device.upper()}")
-    maia2_model=model.from_pretrained(type="rapid", device=device)
+    if maia2_model is None:
+        maia2_model=model.from_pretrained(type="rapid", device=device)
     start_time=time.time()
     total_positions=len(data)
     print(f"Processing {total_positions} positions")
