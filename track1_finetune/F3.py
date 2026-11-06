@@ -2,13 +2,10 @@ import pandas as pd
 import time
 from maia2 import model, inference
 
-<<<<<<< Updated upstream
-def maia2_predict(data, device="cpu", results="results.csv"):
-=======
+
 def maia2_predict(data, device="cpu", results="results.csv", maia2_model=None):
     # print(f"Starting Baseline Evaluation on {device.upper()}")
     # maia2_model=model.from_pretrained(type="rapid", device=device)
->>>>>>> Stashed changes
     print(f"Starting Baseline Evaluation on {device.upper()}")
     maia2_model=model.from_pretrained(type="rapid", device=device)
     start_time=time.time()
