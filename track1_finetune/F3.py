@@ -2,13 +2,19 @@ import pandas as pd
 import time
 from maia2 import model, inference
 
+<<<<<<< Updated upstream
 def maia2_predict(data, device="cpu", results="results.csv"):
+=======
+def maia2_predict(data, device="cpu", results="results.csv", maia2_model=None):
+    # print(f"Starting Baseline Evaluation on {device.upper()}")
+    # maia2_model=model.from_pretrained(type="rapid", device=device)
+>>>>>>> Stashed changes
     print(f"Starting Baseline Evaluation on {device.upper()}")
     maia2_model=model.from_pretrained(type="rapid", device=device)
     start_time=time.time()
     total_positions=len(data)
     print(f"Processing {total_positions} positions")
-    df_results, _=inference.inference_batch(data, maia2_model, verbose=1, batch_size=1024, num_workers=0)
+    df_results, _=inference.inference_batch(data.copy(), maia2_model, verbose=1, batch_size=1024, num_workers=0)
     output_data=[]
     for move_probs in df_results['move_probs']:
         sorted_moves=sorted(move_probs.items(), key=lambda x: x[1], reverse=True)
