@@ -293,20 +293,26 @@ def test_overfit():
     raise AssertionError("could not memorize 64 positions: the training step is broken")
 
 
-def test_run():
+def test_run(train_file="train_20_seed0.csv"):
     model = load_base_model("auto")
-    train_df = pd.read_csv(SPLITS / "train_20_seed0.csv")
+    train_df = pd.read_csv(SPLITS / train_file)
     val_df = pd.read_csv(SPLITS / "val.csv")
     test_df = pd.read_csv(SPLITS / "test.csv")
     set_trainable(model, CONFIG["trainable"])
     model, history = finetune(model, train_df, val_df, CONFIG)
     for h in history:
         print(h)
-    print("\nthakt, 20 games, seed 0  (base Maia-2 was 49.1%)")
+    print(f"\nthakt, training split: {train_file}")
     print(format_report(evaluate(model, test_df)))
 
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--test", choices=["data", "loss", "overfit", "run"], required=True)
-    {"data": test_data, "loss": test_loss, "overfit": test_overfit, "run": test_run}[p.parse_args().test]()
+    p.add_argument("--train-file", default="train_20_seed0.csv",
+                   help="Training CSV filename inside the player's split folder")
+    args = p.parse_args()
+    if args.test == "run":
+        test_run(args.train_file)
+    else:
+        {"data": test_data, "loss": test_loss, "overfit": test_overfit}[args.test]()
